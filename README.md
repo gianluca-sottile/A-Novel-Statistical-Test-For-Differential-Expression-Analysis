@@ -1,33 +1,44 @@
-  # Feature-Weighted-Ordinal-Classification-FWOC-
-The source R code for FWOC. 
+# A-Novel-Statistical-Test-For-Differential-Expression-Analysis
+The source R code for hy.test. 
 
 ## Required R packages:
 
-- MASS
-- caret
-- class
-- Biobase
-- GEOquery
-- ordinalgmifs
-- BhGLM
-- penalizedLDA
+CRAN packages:
+- data.table
+- pbmcapply (only for unix systems or equivalently use some other parallel packages)
+- VennDiagram
+- RISmed
 
-### Helper Functions. R
-This file contains the helper functions that are necessary for the implementation of FWOC.
+Bioconductor packages:
+- preprocessCore
+- limma
+- siggenes
+- topGO
+- org.Hs.eg.db
+- GO.db
 
-### Main Function. R
-This file contains the main function of FWOC, need to run Helper Functions. R first.
+### hy.test.R
+This file contains the main functions that are necessary for the implementation of hy.test.
 
-### Cross Validation.R
-This file contains the function to run cross validation for FWOC, need to run Helper Functions. R and Main Function.R first.
+### loading_and_prepocessing.R
+This file contains the first script that is necessary to load all the required packages and to preprocess raw data.
 
-### Projection_GSE9782.R (Projection_GSE68871.R)
-This file contains the process of testing FWOC on the GSE9782 (GSE68871) dataset, including the data retrival, preprocessing and modeling and achieving the final projections shown in the paper.
+### deg_analysis.R
+This file contains the second script to run all the differential expression analysis, i.e., Moderated t-test, Significance Analysis of Microarray (sam), Empirical Bayes Analysis of Microarrays (ebam) and hy.test.
 
-### Implementaions.R
-This file contains the scripts for implmenting all the four methods based on given training and test datasets, need to run Helper Functions. R first.
+### go_enrichment.R
+This file contains the third script to run gene onthology enrihment by using all the genes selected in the previous analysis. Genes are selected after a Benjamini & Hochberg correction.
 
-### opt_parameters.xlsx
-This file contains the chosen parameters for each training for the four methods. The final results are also included.
+### pubmed_research.R
+This file contains the last script for implmenting the hypergeometric test used to the pubmed research to highlight significant terms of GO. Terms are selected after a Benjamini & Hochberg correction.
+
+### TCGA_BRCA75
+This folder contains the raw gene expression data for breast cancer. The first .txt contains normal samples and the scond one tumor samples.
+
+### TCGA_KIRC75
+This folder contains the raw gene expression data for kidney cancer. The first .txt contains normal samples and the scond one tumor samples.
+
+### Results and outputs
+This folder contains two more folders 'brca' and 'kirc'. In each of them, final .RData objects, .csv files and figures of the overall analysis of the paper is included.
 
 
