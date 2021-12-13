@@ -17,19 +17,19 @@ Bioconductor packages:
 - org.Hs.eg.db
 - GO.db
 
-### hy.test.R
+### 0.hy.test.R
 This file contains the main functions that are necessary for the implementation of hy.test.
 
-### loading_and_prepocessing.R
+### 1.loading_and_prepocessing.R
 This file contains the first script that is necessary to load all the required packages and to preprocess raw data.
 
-### deg_analysis.R
+### 2.deg_analysis.R
 This file contains the second script to run all the differential expression analysis, i.e., Moderated t-test, Significance Analysis of Microarray (sam), Empirical Bayes Analysis of Microarrays (ebam) and hy.test.
 
-### go_enrichment.R
+### 3.go_enrichment.R
 This file contains the third script to run gene onthology enrihment by using all the genes selected in the previous analysis. Genes are selected after a Benjamini & Hochberg correction.
 
-### pubmed_research.R
+### 4.pubmed_research.R
 This file contains the last script for implmenting the hypergeometric test used to the pubmed research to highlight significant terms of GO. Terms are selected after a Benjamini & Hochberg correction.
 
 ### TCGA_BRCA75
