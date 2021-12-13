@@ -57,12 +57,9 @@ if(!requireNamespace("RISmed", quietly = TRUE)){
 }
 library("RISmed")
 
-source("/Volumes/GoogleDrive/Il mio Drive/Metodi di discretizzazione/1. R code/hy.test.R")
+source("0.hy.test.R")
 
-wdir <- "/Volumes/GoogleDrive/Il mio Drive/Metodi di discretizzazione/2. Data/"
-setwd(wdir)
-
-TISSUE <- "kirc" # or brca
+TISSUE <- "brca" # or kirc
 if(TISSUE == "kirc") {
   files <- c("TCGA_KIRC67/geneExpression_inNormalSamples.txt",
              "TCGA_KIRC67/geneExpression_inTumorSamples.txt")  
@@ -78,7 +75,7 @@ tmp <- fread(files[[2]], header=T, sep="\t")
 dati.geni <- cbind(dati.geni, tmp[, 4:dim(tmp)[2]]) 
 rm(tmp)
 
-wdir <- paste0(wdir, TISSUE)
+wdir <- paste0("Results and outputs/", TISSUE)
 setwd(wdir)
 
 dati.geni <- subset(dati.geni, BRCA_ensembl != "?") # delete unknown genes
