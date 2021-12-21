@@ -99,18 +99,18 @@ venn.diagram(vpj, filename = "VennBonf.png" ,
              cat.default.pos = "outer",
              cat.fontfamily = "sans",
              cat.col = colori ,
-             cat.dist= 0.04,
+             cat.dist = c(0.05, .05, .05),
              cat.pos=0,
-             margin = 0.05,
+             margin = 0.0,
              scaled = FALSE ,
              force.unique = FALSE)
 
 vpj <- list("hy-test" = names(outPvals05BH),
             "moderated t-test" = rownames(topBH),
-            "sam" = names(sam.obj.pv.Bonf[sam.obj.pv.Bonf <= .05]),
-            "ebam" = names(summary(ebam.obj, delta = .95)@row.sig.genes))
+            "sam" = names(sam.obj.pv.Bonf[sam.obj.pv.BH <= .05]))#,
+            # "ebam" = names(summary(ebam.obj, delta = .95)@row.sig.genes))
 
-colori<- c("mediumseagreen", "brown1", "blue", "yellow")
+colori<- c("mediumseagreen", "brown1", "blue")#, "yellow")
 colori_tr <- adjustcolor(colori, alpha.f = 0.2)
 colori_bordo<- adjustcolor(colori, alpha.f = 0.5)
 
@@ -131,9 +131,9 @@ venn.diagram(vpj, filename = "VennBH.png" ,
              cat.default.pos = "outer",
              cat.fontfamily = "sans",
              cat.col = colori ,
-             cat.dist = c(.2,.2,.1,.1),
+             cat.dist = c(0.05, .05, .05),
              cat.pos = 1,
-             margin = 0.05,
+             margin = 0.0,
              scaled = FALSE ,
              force.unique = FALSE)
 
