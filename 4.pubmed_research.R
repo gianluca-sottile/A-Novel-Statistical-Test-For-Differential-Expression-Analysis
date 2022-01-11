@@ -186,18 +186,18 @@ sum(subset(risult.all, rif.bonf.sam == 1)$Term %in% out3[out3$pval.bonf <= .05, 
 
 
 vpj <- list("hy-test" = subset(risult.all, rif.bonf.our == 1)$Term.hy[subset(risult.all, rif.bonf.our == 1)$Term.hy %in% out3[out3$pval.bonf <= .05, "termini"]], 
-            "moderated t-test" = subset(risult.all, rif.bonf.t == 1)$Term.t[subset(risult.all, rif.bonf.t == 1)$Term.t %in% out3[out3$pval.bonf <= .05, "termini"]],
+            "mod t-test" = subset(risult.all, rif.bonf.t == 1)$Term.t[subset(risult.all, rif.bonf.t == 1)$Term.t %in% out3[out3$pval.bonf <= .05, "termini"]],
             "sam" = subset(risult.all, rif.bonf.sam == 1)$Term[subset(risult.all, rif.bonf.sam == 1)$Term %in% out3[out3$pval.bonf <= .05, "termini"]])#,
 # "ebam" = subset(risult.all, rif.bonf.ebam == 1)$Term.ebam[subset(risult.all, rif.bonf.ebam == 1)$Term.ebam %in% out2[out2$pval.bonf <= .05, "termini"]])
 
-venn.diagram(vpj, filename = "VennTermsBonf2.png",
+venn.diagram(vpj, filename = paste0(TISSUE, "_PubMedResearch.png"),
              imagetype = "png" ,
              height = 640 , 
              width = 640 , 
              resolution = 300,
              compression = "lzw",
              main.cex = 0.5,
-             main = "Venn of terms",
+             main = "",#paste0(ifelse(TISSUE == "brca", "A)","B)"), " PubMed research"),
              lwd = 1,
              col = colori ,
              fill = colori_tr,
@@ -207,9 +207,9 @@ venn.diagram(vpj, filename = "VennTermsBonf2.png",
              cat.default.pos = "outer",
              cat.fontfamily = "sans",
              cat.col = colori ,
-             cat.dist = c(0.05, 0.05, -.45),
+             cat.dist = c(0.05, 0.05, .05),
              cat.pos = 0,
-             margin = 0.05 ,
+             margin = 0.0 ,
              scaled = FALSE ,
              force.unique = FALSE)
 

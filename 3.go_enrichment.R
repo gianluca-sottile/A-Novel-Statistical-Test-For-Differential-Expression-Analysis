@@ -160,21 +160,21 @@ table(risult.all$rif.BH.sam)
 write.table(risult.all, "risultati_all.txt" , row.names = F)
 
 vpj <- list("hy-test" = subset(risult.all, rif.bonf.our == 1)$Term.hy, 
-            "moderated t-test" = subset(risult.all, rif.bonf.t == 1)$Term.t,
+            "mod t-test" = subset(risult.all, rif.bonf.t == 1)$Term.t,
             "sam" = subset(risult.all, rif.bonf.sam == 1)$Term)#,
             # "ebam" = subset(risult.all, rif.bonf.ebam == 1)$Term.ebam)
-colori <- c("mediumseagreen", "brown1", "blue")#, "yellow")
-colori_tr <- adjustcolor(colori, alpha.f = 0.2)
-colori_bordo <- adjustcolor(colori, alpha.f = 0.5)
+# colori <- c("mediumseagreen", "brown1", "blue")#, "yellow")
+# colori_tr <- adjustcolor(colori, alpha.f = 0.2)
+# colori_bordo <- adjustcolor(colori, alpha.f = 0.5)
 
-venn.diagram(vpj, filename = "VennGOBonf.png",
+venn.diagram(vpj, filename = paste0(TISSUE, "_EnrichmentAnalysis.png"),
              imagetype = "png" ,
              height = 640 , 
              width = 640 , 
              resolution = 300,
              compression = "lzw",
              main.cex = 0.5,
-             main = "Venn of GO terms",
+             main = "",#paste0(ifelse(TISSUE == "brca", "A)","B)"), " Enrichment Analysis"),
              lwd = 1,
              col = colori ,
              fill = colori_tr,
@@ -186,7 +186,7 @@ venn.diagram(vpj, filename = "VennGOBonf.png",
              cat.col = colori ,
              cat.dist = c(0.05, 0.05, -.45),
              cat.pos = 0,
-             margin = 0.1 ,
+             margin = 0.0 ,
              scaled = FALSE ,
              force.unique = FALSE)
 

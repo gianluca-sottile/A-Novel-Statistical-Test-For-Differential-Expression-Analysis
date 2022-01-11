@@ -75,21 +75,21 @@ outPvals05BH <- out[idPvals05BH]
 plot(outPvals05Bonf[[4]]) 
 
 vpj <- list("hy-test" = names(outPvals05Bonf),
-            "moderated t-test" = rownames(topBonf),
+            "mod t-test" = rownames(topBonf),
             "sam" = names(sam.obj.pv.Bonf[sam.obj.pv.Bonf <= .05]))
 
-colori<- c("mediumseagreen", "brown1", "blue")
+colori<- gray.colors(n = 3, start = .3, end = .7)
 colori_tr <- adjustcolor(colori, alpha.f = 0.2)
 colori_bordo<- adjustcolor(colori, alpha.f = 0.5)
 
-venn.diagram(vpj, filename = "VennBonf.png" ,
+venn.diagram(vpj, filename = paste0(TISSUE, "_DEA.png"),
              imagetype = "png" ,
              height = 640 , 
              width = 640 , 
              resolution = 300,
              compression = "lzw",
-             main.cex=0.5,
-             main = "",
+             main.cex = 0.5,
+             main = "",#paste0(ifelse(TISSUE == "brca", "A)","B)"), " DEA"),
              lwd = 1,
              col = colori ,
              fill = colori_tr,
@@ -99,8 +99,8 @@ venn.diagram(vpj, filename = "VennBonf.png" ,
              cat.default.pos = "outer",
              cat.fontfamily = "sans",
              cat.col = colori ,
-             cat.dist = c(0.05, .05, .05),
-             cat.pos=0,
+             cat.dist = c(0.1, .1, .05),
+             cat.pos = 0,
              margin = 0.0,
              scaled = FALSE ,
              force.unique = FALSE)
