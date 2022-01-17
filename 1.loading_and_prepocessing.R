@@ -123,7 +123,7 @@ screening <- function(data, perc = .95){
   
   return(data)
 }
-dati.geni <- screening(data = dati.geni, perc = .95)
+dati.geni <- screening(data = dati.geni, perc = 0)
 dati.geni <- as.matrix(dati.geni)
 print(dim(dati.geni))
 

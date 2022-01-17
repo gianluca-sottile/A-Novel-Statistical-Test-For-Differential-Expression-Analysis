@@ -4,7 +4,7 @@ g.list <- unique(lista_geni)
 tot.geni <- length(g.list)
 
 # hy-test
-geni.selezionati.our <- unique(names(outPvals05Bonf))
+geni.selezionati.our <- unique(names(idPvals05Bonf))
 geneList.our <- factor(as.integer(g.list %in% geni.selezionati.our))
 names(geneList.our) <- g.list
 
@@ -157,7 +157,7 @@ table(risult.all$rif.BH.t)
 table(risult.all$rif.BH.sam)
 # table(risult.all$rif.BH.ebam)
 
-write.table(risult.all, "risultati_all.txt" , row.names = F)
+write.table(risult.all, "risultati_all_new.txt" , row.names = F)
 
 vpj <- list("hy-test" = subset(risult.all, rif.bonf.our == 1)$Term.hy, 
             "mod t-test" = subset(risult.all, rif.bonf.t == 1)$Term.t,
@@ -190,33 +190,33 @@ venn.diagram(vpj, filename = paste0(TISSUE, "_EnrichmentAnalysis.png"),
              scaled = FALSE ,
              force.unique = FALSE)
 
-vpj <- list("hy-test" = subset(risult.all, rif.BH.our == 1)$Term.hy, 
-            "moderated t-test" = subset(risult.all, rif.BH.t == 1)$Term.t,
-            "sam" = subset(risult.all, rif.BH.sam == 1)$Term)#,
+# vpj <- list("hy-test" = subset(risult.all, rif.BH.our == 1)$Term.hy, 
+#             "moderated t-test" = subset(risult.all, rif.BH.t == 1)$Term.t,
+#             "sam" = subset(risult.all, rif.BH.sam == 1)$Term)#,
 # "ebam" = subset(risult.all, rif.bonf.ebam == 1)$Term.ebam)
 
-venn.diagram(vpj, filename = "VennGOBH.png",
-             imagetype = "png" ,
-             height = 640 , 
-             width = 640 , 
-             resolution = 300,
-             compression = "lzw",
-             main.cex = 0.5,
-             main = "Venn of GO terms",
-             lwd = 1,
-             col = colori ,
-             fill = colori_tr,
-             cex = 0.5,  # grandezza of area lab
-             fontfamily = "sans",
-             cat.cex = 0.5,    ## cat si riferisce ai nomi dei cerchi
-             cat.default.pos = "outer",
-             cat.fontfamily = "sans",
-             cat.col = colori ,
-             cat.dist = c(0.05, 0.05, -.45),
-             cat.pos = 0,
-             margin = 0.1 ,
-             scaled = FALSE ,
-             force.unique = FALSE)
+# venn.diagram(vpj, filename = "VennGOBH.png",
+#              imagetype = "png" ,
+#              height = 640 , 
+#              width = 640 , 
+#              resolution = 300,
+#              compression = "lzw",
+#              main.cex = 0.5,
+#              main = "Venn of GO terms",
+#              lwd = 1,
+#              col = colori ,
+#              fill = colori_tr,
+#              cex = 0.5,  # grandezza of area lab
+#              fontfamily = "sans",
+#              cat.cex = 0.5,    ## cat si riferisce ai nomi dei cerchi
+#              cat.default.pos = "outer",
+#              cat.fontfamily = "sans",
+#              cat.col = colori ,
+#              cat.dist = c(0.05, 0.05, -.45),
+#              cat.pos = 0,
+#              margin = 0.1 ,
+#              scaled = FALSE ,
+#              force.unique = FALSE)
 
 
 # all(subset(risult.all, rif.bonf.our == 1 | rif.bonf.t == 1 | rif.bonf.sam == 1 | rif.bonf.ebam == 1)$Term.hy %in% 

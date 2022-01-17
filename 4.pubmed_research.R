@@ -7,7 +7,7 @@ universe_text <- ""
 tissue <- ifelse(TISSUE == "kirc", "kidney", "breast")
 tumor <- paste(tissue, "cancer")
 terms <- paste0(risult.all2$Term.hy)
-tumor_and_terms <- paste(tumor, termini, sep = " AND ")
+tumor_and_terms <- paste(tumor, terms, sep = " AND ")
 GO_ID <- risult.all2$GO.ID
 
 # numer of the urn
@@ -81,6 +81,7 @@ for(i in 1:length(terms)){  #
   
   temp <- pvalHyper(universe = universe, tumor = white_balls, terms = terms[i], tumor_and_terms = tumor_and_terms[i])
   out2 <- rbind(out2, temp)
+  print(paste0("Iter ", i, " pval ", out2[i, 6L]))
 }
 close(pb)
 
@@ -109,64 +110,64 @@ sum(subset(risult.all, rif.bonf.sam == 1)$Term %in% out2[out2$pval.bonf <= .05, 
 # dim(subset(risult.all, rif.bonf.ebam == 1))
 # sum(subset(risult.all, rif.bonf.ebam == 1)$Term.ebam %in% out2[out2$pval.bonf <= .05, "termini"])
 
-vpj <- list("hy-test" = subset(risult.all, rif.BH.our == 1)$Term.hy[subset(risult.all, rif.BH.our == 1)$Term.hy %in% out2[out2$pval.BH <= .05, "termini"]], 
-            "moderated t-test" = subset(risult.all, rif.BH.t == 1)$Term.t[subset(risult.all, rif.BH.t == 1)$Term.t %in% out2[out2$pval.BH <= .05, "termini"]],
-            "sam" = subset(risult.all, rif.BH.sam == 1)$Term[subset(risult.all, rif.BH.sam == 1)$Term %in% out2[out2$pval.BH <= .05, "termini"]])#,
-# "ebam" = subset(risult.all, rif.BH.ebam == 1)$Term.ebam[subset(risult.all, rif.BH.ebam == 1)$Term.ebam %in% out2[out2$pval.BH <= .05, "termini"]])
-colori <- c("mediumseagreen", "brown1", "blue")#, "yellow")
-colori_tr <- adjustcolor(colori, alpha.f = 0.2)
-colori_bordo <- adjustcolor(colori, alpha.f = 0.5)
-
-venn.diagram(vpj, filename = "VennTermsBH.png",
-             imagetype = "png" ,
-             height = 640 , 
-             width = 640 , 
-             resolution = 300,
-             compression = "lzw",
-             main.cex = 0.5,
-             main = "Venn of terms",
-             lwd = 1,
-             col = colori ,
-             fill = colori_tr,
-             cex = 0.5,  # grandezza of area lab
-             fontfamily = "sans",
-             cat.cex = 0.5,    ## cat si riferisce ai nomi dei cerchi
-             cat.default.pos = "outer",
-             cat.fontfamily = "sans",
-             cat.col = colori ,
-             cat.dist = c(0.05, 0.05, .05),
-             cat.pos = 0,
-             margin = 0.05 ,
-             scaled = FALSE ,
-             force.unique = FALSE)
-
-vpj <- list("hy-test" = subset(risult.all, rif.bonf.our == 1)$Term.hy[subset(risult.all, rif.bonf.our == 1)$Term.hy %in% out2[out2$pval.bonf <= .05, "termini"]], 
-            "moderated t-test" = subset(risult.all, rif.bonf.t == 1)$Term.t[subset(risult.all, rif.bonf.t == 1)$Term.t %in% out2[out2$pval.bonf <= .05, "termini"]],
-            "sam" = subset(risult.all, rif.bonf.sam == 1)$Term[subset(risult.all, rif.bonf.sam == 1)$Term %in% out2[out2$pval.bonf <= .05, "termini"]])#,
-# "ebam" = subset(risult.all, rif.bonf.ebam == 1)$Term.ebam[subset(risult.all, rif.bonf.ebam == 1)$Term.ebam %in% out2[out2$pval.bonf <= .05, "termini"]])
-
-venn.diagram(vpj, filename = "VennTermsBonf.png",
-             imagetype = "png" ,
-             height = 640 , 
-             width = 640 , 
-             resolution = 300,
-             compression = "lzw",
-             main.cex = 0.5,
-             main = "Venn of terms",
-             lwd = 1,
-             col = colori ,
-             fill = colori_tr,
-             cex = 0.5,  # grandezza of area lab
-             fontfamily = "sans",
-             cat.cex = 0.5,    ## cat si riferisce ai nomi dei cerchi
-             cat.default.pos = "outer",
-             cat.fontfamily = "sans",
-             cat.col = colori ,
-             cat.dist = c(0.05, 0.05, -.45),
-             cat.pos = 0,
-             margin = 0.05 ,
-             scaled = FALSE ,
-             force.unique = FALSE)
+# vpj <- list("hy-test" = subset(risult.all, rif.BH.our == 1)$Term.hy[subset(risult.all, rif.BH.our == 1)$Term.hy %in% out2[out2$pval.BH <= .05, "termini"]], 
+#             "moderated t-test" = subset(risult.all, rif.BH.t == 1)$Term.t[subset(risult.all, rif.BH.t == 1)$Term.t %in% out2[out2$pval.BH <= .05, "termini"]],
+#             "sam" = subset(risult.all, rif.BH.sam == 1)$Term[subset(risult.all, rif.BH.sam == 1)$Term %in% out2[out2$pval.BH <= .05, "termini"]])#,
+# # "ebam" = subset(risult.all, rif.BH.ebam == 1)$Term.ebam[subset(risult.all, rif.BH.ebam == 1)$Term.ebam %in% out2[out2$pval.BH <= .05, "termini"]])
+# colori <- c("mediumseagreen", "brown1", "blue")#, "yellow")
+# colori_tr <- adjustcolor(colori, alpha.f = 0.2)
+# colori_bordo <- adjustcolor(colori, alpha.f = 0.5)
+# 
+# venn.diagram(vpj, filename = "VennTermsBH.png",
+#              imagetype = "png" ,
+#              height = 640 , 
+#              width = 640 , 
+#              resolution = 300,
+#              compression = "lzw",
+#              main.cex = 0.5,
+#              main = "Venn of terms",
+#              lwd = 1,
+#              col = colori ,
+#              fill = colori_tr,
+#              cex = 0.5,  # grandezza of area lab
+#              fontfamily = "sans",
+#              cat.cex = 0.5,    ## cat si riferisce ai nomi dei cerchi
+#              cat.default.pos = "outer",
+#              cat.fontfamily = "sans",
+#              cat.col = colori ,
+#              cat.dist = c(0.05, 0.05, .05),
+#              cat.pos = 0,
+#              margin = 0.05 ,
+#              scaled = FALSE ,
+#              force.unique = FALSE)
+# 
+# vpj <- list("hy-test" = subset(risult.all, rif.bonf.our == 1)$Term.hy[subset(risult.all, rif.bonf.our == 1)$Term.hy %in% out2[out2$pval.bonf <= .05, "termini"]], 
+#             "moderated t-test" = subset(risult.all, rif.bonf.t == 1)$Term.t[subset(risult.all, rif.bonf.t == 1)$Term.t %in% out2[out2$pval.bonf <= .05, "termini"]],
+#             "sam" = subset(risult.all, rif.bonf.sam == 1)$Term[subset(risult.all, rif.bonf.sam == 1)$Term %in% out2[out2$pval.bonf <= .05, "termini"]])#,
+# # "ebam" = subset(risult.all, rif.bonf.ebam == 1)$Term.ebam[subset(risult.all, rif.bonf.ebam == 1)$Term.ebam %in% out2[out2$pval.bonf <= .05, "termini"]])
+# 
+# venn.diagram(vpj, filename = "VennTermsBonf.png",
+#              imagetype = "png" ,
+#              height = 640 , 
+#              width = 640 , 
+#              resolution = 300,
+#              compression = "lzw",
+#              main.cex = 0.5,
+#              main = "Venn of terms",
+#              lwd = 1,
+#              col = colori ,
+#              fill = colori_tr,
+#              cex = 0.5,  # grandezza of area lab
+#              fontfamily = "sans",
+#              cat.cex = 0.5,    ## cat si riferisce ai nomi dei cerchi
+#              cat.default.pos = "outer",
+#              cat.fontfamily = "sans",
+#              cat.col = colori ,
+#              cat.dist = c(0.05, 0.05, -.45),
+#              cat.pos = 0,
+#              margin = 0.05 ,
+#              scaled = FALSE ,
+#              force.unique = FALSE)
 
 
 risult.all3 <- subset(risult.all, rif.bonf.our == 1 | rif.bonf.t == 1 | rif.bonf.sam == 1)# | rif.BH.ebam == 1)
@@ -207,7 +208,7 @@ venn.diagram(vpj, filename = paste0(TISSUE, "_PubMedResearch.png"),
              cat.default.pos = "outer",
              cat.fontfamily = "sans",
              cat.col = colori ,
-             cat.dist = c(0.05, 0.05, .05),
+             cat.dist = c(0.05, 0.05, -.45),
              cat.pos = 0,
              margin = 0.0 ,
              scaled = FALSE ,
@@ -227,6 +228,6 @@ risult.all4$group <- factor(risult.all4$group,
                             levels = c("hy-test", "mod t-test", "sam", "hy-test/mod t-test", 
                                        "hy-test/sam", "mod t-test/sam", "all"))
 table(risult.all4$group)
-write.csv2(risult.all4[order(risult.all4$group, risult.all4$Term),], "risultati_all4.csv" , row.names = F)
+write.csv2(risult.all4[order(risult.all4$group, risult.all4$Term),], "risultati_all4_new.csv" , row.names = F)
 
-save.image(paste0(TISSUE, "_pubmed_research_", format(Sys.Date(), "%d%m%y"), ".RData"))
+save.image(paste0(TISSUE, "_pubmed_research_", format(Sys.Date(), "%d%m%y"), "_new.RData"))

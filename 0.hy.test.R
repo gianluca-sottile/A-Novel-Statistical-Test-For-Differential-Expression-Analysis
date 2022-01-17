@@ -18,6 +18,10 @@ hy.test.default <- function (x, y, nthresh = 50L, paired = TRUE, ...) {
   minimum <- floor(min(min(x), min(y)))
   max.val <- min(max(x), max(y))
   maximum <- ceiling(max(max(x), max(y)))
+  if(min.val == max.val) {
+    min.val <- min.val * ifelse(sign(min.val) == -1, 1.05, .95)
+    max.val <- max.val * ifelse(sign(max.val) == -1, .95, 1.05)
+  }
   thresh <- seq(min.val, max.val, length.out = nthresh)
   thresh <- CJ("V1" = thresh, "V2" = thresh) 
   thresh <- thresh[which(thresh$V1 > thresh$V2)]
